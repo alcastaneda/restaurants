@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<% if @results.class == String %>
+		<h1><%= @results%></h1>
+	<% else %>
+		<% @results.each do |restaurant| %>
+			<h1><%= restaurant["aka_name"] %></h1>
+			<h3><%= restaurant["address"] %></h3>
+			<p><%= restaurant["results"] %></p>
+			<p><%= restaurant["inspection_date"][0..-14]%></p>
+			<% if restaurant.key?("violations") %>
+				<% restaurant["violations"].gsub("\n",'').split('|').each do |violation| %>
+					<p><%= violation %></p>
+				<% end %>
+			<% end %>
+		<% end %>
+	<% end %>
+</body>
+</html>
