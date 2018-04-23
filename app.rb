@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'httparty'
+require 'json'
 
 def sanitize_form(form_params)
 	sanitized_params = form_params.each{|k,v| form_params.delete(k) if v.length==0}
@@ -33,5 +34,9 @@ end
 get	'/results' do
 	sanitized = sanitize_form(params[:restaurant])
 	@results = find_restaurants(sanitized)
-	erb :results
+	if request.xhr?
+		erb :results, :layout=>false
+	else
+		erb :results
+	end
 end
