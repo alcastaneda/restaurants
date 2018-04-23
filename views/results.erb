@@ -9,9 +9,9 @@
 		<h1><%= restaurant["aka_name"] %></h1>
 		<h3><%= restaurant["address"] %></h3>
 		<p><%= restaurant["results"] %></p>
-		<p><%= restaurant["inspection_date"][0..-14]%></p>
+		<p><%= restaurant["inspection_date"]%></p>
 		<% if restaurant.key?("violations") %>
-			<% restaurant["violations"].gsub("\n",'').split('|').each do |violation| %>
+			<% restaurant["violations"].each do |violation| %>
 				<p><%= violation %></p>
 			<% end %>
 		<% end %>
