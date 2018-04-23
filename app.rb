@@ -1,6 +1,5 @@
 require 'sinatra'
 require 'httparty'
-require 'json'
 enable :sessions
 
 def sanitize_form(form_params)
