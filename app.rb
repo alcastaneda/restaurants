@@ -1,6 +1,5 @@
 require 'sinatra'
 require 'httparty'
-enable :sessions
 
 def sanitize_form(form_params)
 	sanitized_params = form_params.each{|k,v| form_params.delete(k) if v.length==0}
@@ -28,17 +27,11 @@ def find_restaurants(sanitized_params)
 end
 
 get '/' do
-	session.clear
 	erb :search
 end
 
-post '/search' do
-	session[:restaurant] = params[:restaurant]
-	redirect '/results' 
-end
-
 get	'/results' do
-	sanitized = sanitize_form(session[:restaurant])
+	sanitized = sanitize_form(params[:restaurant])
 	@results = find_restaurants(sanitized)
 	erb :results
 end
